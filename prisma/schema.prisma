@@ -10,9 +10,10 @@ generator client {
 
 model Users {
   id         Int         @id @default(autoincrement())
-  email      String
+  email      String      @unique
   name       String
   password   String
+  type       UserRole
   created_at DateTime    @default(now())
   Purchases  Purchases[]
 }
@@ -33,4 +34,9 @@ model Purchases {
   user       Users    @relation(fields: [user_id], references: [id])
   user_id    Int
   date       DateTime @default(now())
+}
+
+enum UserRole {
+  USER
+  ADMIN
 }

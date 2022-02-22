@@ -1,7 +1,5 @@
-import "reflect-metadata";
 import { app } from "@routes/index.routes";
-import "./shared/container";
-import { ServerLog } from "./helpers/WriteStartLog";
+import { ServerLog } from "@helpers/WriteStartLog";
 
 async function bootstrap() {
   try {
@@ -11,6 +9,8 @@ async function bootstrap() {
     });
   } catch (error: any) {
     ServerLog(error);
+    console.log(error);
+    console.log("There is an error on starting server, see logs for details");
     process.exit(0);
   }
 }

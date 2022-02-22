@@ -13,10 +13,11 @@ export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
         authToken as string,
         process.env.SECRET as string
       );
-      if (admintoken.type != "admin") {
+      if (admintoken.type != "ADMIN") {
         res.status(401).send({ error: "Unauthorized" });
+      } else {
+        return next();
       }
-      return next();
     } catch (err: Error | any) {
       handleError(err, "verifyAdmin");
       res.status(500).send({ error: "Invalid token" });

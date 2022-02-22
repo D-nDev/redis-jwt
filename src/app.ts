@@ -1,5 +1,4 @@
 import "dotenv/config";
-import "reflect-metadata";
 import express from "express";
 import helmet from "helmet";
 import compression from "compression";
@@ -11,6 +10,7 @@ import path from "path";
 import morgan from "morgan";
 import { dateoptions } from "./helpers/Morgan";
 import { generate } from "./helpers/GenerateLogsFolder";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -28,6 +28,7 @@ app.use(express.json());
 app.use(compression());
 app.use(helmet());
 app.disable("x-powered-by");
+app.use(cookieParser());
 app.use(limiter);
 app.use(slower);
 app.use(cors(corsOptions));
