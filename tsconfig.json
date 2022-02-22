@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "resolveJsonModule": true,
+    "paths": {
+      "@app/*": [
+        "*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@controllers/*": [
+        "controllers/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@logs/*": [
+        "logs/*"
+      ],
+      "@middlewares/*": [
+        "middlewares/*"
+      ],
+      "@routes/*": [
+        "routes/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@interface/*": [
+        "interfaces/*"
+      ],
+      "@validations/*": [
+        "validations/*"
+      ],
+    },
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      }
+    ],
+    "typeRoots": [
+      "./src/@types",
+      "node_modules/@types"
+    ],
+  },
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "src/__mock__",
+    "src/__tests__"
+  ]
+}
