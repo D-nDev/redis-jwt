@@ -3,6 +3,12 @@ import prisma from "@helpers/PrismaClient";
 import { sign, verify } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import dotenv from "dotenv";
+import { getRedis, setRedis } from "@app/helpers/RedisClient";
+import {
+  afterFirstTry,
+  correctPasswordButThreeTries,
+  firstTry,
+} from "@app/helpers/CheckTries";
 dotenv.config();
 
 export class LoginUserService {
@@ -17,12 +23,21 @@ export class LoginUserService {
       throw "emailnotfound";
     }
 
+    const currenttries: any = await getRedis(`user-${userexists!.id}`);
+
     const checkpassword = await compare(password, userexists.password);
 
     if (!checkpassword) {
-      throw "invalidpass";
+      if (!currenttries) {
+        await firstTry(userexists!.id);
+      } else {
+        await afterFirstTry(userexists!.id, currenttries);
+      }
     }
 
+    if (currenttries) {
+      await correctPasswordButThreeTries(userexists!.id, currenttries);
+    }
     const usertoken = sign(
       {
         id: userexists.id,

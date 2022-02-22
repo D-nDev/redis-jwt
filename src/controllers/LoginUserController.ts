@@ -22,8 +22,14 @@ export class LoginUserController {
         });
         res.status(201).send(result);
       } catch (err: any) {
-        if (err == "invalidpass") {
-          res.status(401).json({ error: "Invalid password" });
+        if (err.name == "invalidpass") {
+          res
+            .status(401)
+            .json({
+              error: "Invalid password",
+              tries: err.tries,
+              remaining: err.remaining,
+            });
         } else if (err == "invalidjwt") {
           res.status(401).json({ error: "Invalid token" });
         } else if (err == "emailnotfound") {

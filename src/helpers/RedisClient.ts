@@ -14,14 +14,40 @@ redisClient.on("error", function (error) {
   handleError(error, "RedisClient");
 });
 
-function getRedis(value: string) {
-  const syncRedisGet = promisify(redisClient.get).bind(redisClient);
-  return syncRedisGet(value);
+async function getRedis(key: string) {
+  return new Promise((resolve, reject) => {
+    redisClient.get(key, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
 }
 
-function setRedis(key: string, value: any) {
-  const syncRedisSet = promisify(redisClient.set).bind(redisClient);
-  return syncRedisSet(key, value);
+async function setRedis(key: string, value: any) {
+  return new Promise((resolve, reject) => {
+    redisClient.set(key, value, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
 }
 
-export { redisClient, getRedis, setRedis };
+async function setRedisTime(key: string, value: any, time: string | number) {
+  return new Promise((resolve, reject) => {
+    redisClient.set(key, value, "ex", time, function (err, result) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
+
+export { redisClient, getRedis, setRedis, setRedisTime };

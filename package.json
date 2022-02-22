@@ -15,6 +15,7 @@
   "dependencies": {
     "@prisma/client": "^3.9.2",
     "bcrypt": "^5.0.1",
+    "bluebird": "^3.7.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -31,10 +32,12 @@
     "promisify": "^0.0.3",
     "swagger-ui-express": "^4.3.0",
     "tsconfig-paths": "^3.12.0",
-    "typescript-transform-paths": "^3.3.1"
+    "typescript-transform-paths": "^3.3.1",
+    "when": "^3.7.8"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/bluebird": "^3.5.36",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.12",
