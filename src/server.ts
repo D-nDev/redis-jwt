@@ -5,7 +5,7 @@ async function bootstrap() {
   try {
     app.listen(4000, () => {
       console.log("Server is running on port 4000");
-      console.log("Swagger API Docs running at /docs");
+      //console.log("Swagger API Docs running at /docs");
     });
   } catch (error: any) {
     ServerLog(error);

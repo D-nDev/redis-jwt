@@ -3,7 +3,7 @@ import prisma from "@helpers/PrismaClient";
 import { sign, verify } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import dotenv from "dotenv";
-import { getRedis, setRedis } from "@app/helpers/RedisClient";
+import { getRedis } from "@app/helpers/RedisClient";
 import {
   afterFirstTry,
   correctPasswordButThreeTries,
